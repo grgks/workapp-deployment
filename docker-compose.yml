@@ -5,10 +5,10 @@ services:
     ports:
       - "${BACKEND_PORT:-8080}:8080"
     environment:
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_NAME: ${DB_NAME}
-      JWT_SECRET: ${JWT_SECRET}
+      DB_NAME: ${DEPLOY_DB_NAME}
+      DB_USERNAME: ${DEPLOY_DB_USERNAME}
+      DB_PASSWORD: ${DEPLOY_DB_PASSWORD}
+      JWT_SECRET: ${DEPLOY_JWT_SECRET}
       SPRING_PROFILES_ACTIVE: docker
     depends_on:
       db:
@@ -32,14 +32,14 @@ services:
     image: mysql:8.0
     container_name: workapp-db
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DEPLOY_DB_PASSWORD}
+      MYSQL_DATABASE: ${DEPLOY_DB_NAME}
     ports:
       - "${DB_PORT:-3306}:3306"
     volumes:
       - db-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DEPLOY_DB_PASSWORD}"]
       interval: 10s
       timeout: 5s
       retries: 5
