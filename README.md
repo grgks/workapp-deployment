@@ -17,7 +17,7 @@ Complete Docker-based deployment configuration for the WorkApp full-stack applic
 - [Security](#security)
 - [Related Repositories](#related-repositories)
 
-## 🎯 Overview
+## Overview
 
 This repository provides production-ready Docker Compose configuration for deploying the complete WorkApp system with:
 
@@ -27,7 +27,7 @@ This repository provides production-ready Docker Compose configuration for deplo
 - **Auto-seeding:** Pre-configured cities data
 - **Health checks:** Automated container health monitoring
 
-## 🏗️ Architecture
+## Architecture
 ```
 ┌─────────────────┐
 │   Frontend      │
@@ -55,7 +55,7 @@ This repository provides production-ready Docker Compose configuration for deplo
 - **Database:** MySQL 8.0 with automatic schema creation
 - **Network:** Isolated Docker bridge network
 
-## ✅ Prerequisites
+## Prerequisites
 
 - **Docker Desktop** (or Docker Engine + Docker Compose)
   - Windows/Mac: [Docker Desktop](https://www.docker.com/products/docker-desktop)
@@ -63,7 +63,7 @@ This repository provides production-ready Docker Compose configuration for deplo
 - **Ports available:** 3000 (frontend), 8080 (backend), 3307 (database)
 - **Minimum:** 4GB RAM, 2 CPU cores
 
-## 🚀 Quick Start
+## Quick Start
 
 **Three commands to deploy:**
 ```bash
@@ -89,7 +89,7 @@ docker-compose down
 docker-compose down -v
 ```
 
-## 📦 Deployment Methods
+## Deployment Methods
 
 ### Method 1: Git Clone (Recommended)
 ```bash
@@ -127,7 +127,7 @@ docker pull mysql:8.0
 # Then use docker-compose.yml from this repository
 ```
 
-## ⚙️ Environment Configuration
+## Environment Configuration
 
 ### .env File Structure
 ```env
@@ -169,7 +169,7 @@ DOCKER_USERNAME=grgks
 - Never commit `.env` to version control
 - Change default passwords in production
 
-## 🔍 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -242,7 +242,7 @@ docker rmi grgks/workapp-frontend:latest
 docker-compose up -d
 ```
 
-## 🔒 Security
+## Security
 
 ### Automated Security Scanning
 
@@ -265,7 +265,7 @@ View security reports:
 - [ ] Monitor logs for suspicious activity
 - [ ] Backup database regularly
 
-## 📚 Related Repositories
+## Related Repositories
 
 ### Application Code
 
