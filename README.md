@@ -8,7 +8,7 @@ Complete Docker-based deployment configuration for the WorkApp full-stack applic
 ## 📋 Table of Contents
 
 - [Overview](#overview)
-- [Architecture](#architecture)
+- [System Architecture & Flow](#system-architecture--flow)
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Deployment Methods](#deployment-methods)
@@ -27,33 +27,40 @@ This repository provides production-ready Docker Compose configuration for deplo
 - **Auto-seeding:** Pre-configured cities data
 - **Health checks:** Automated container health monitoring
 
-## Architecture
-```
-┌─────────────────┐
-│   Frontend      │
-│   (React)       │
-│   Port: 3000    │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│   Backend       │
-│   (Spring Boot) │
-│   Port: 8080    │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│   MySQL 8.0     │
-│   Port: 3307    │
-└─────────────────┘
+## System Architecture & Flow
+```mermaid
+graph LR
+    User[User Browser<br/>:3000]
+    Frontend[Frontend<br/>React + Nginx]
+    Backend[Backend<br/>Spring Boot + JWT]
+    DB[(MySQL 8.0<br/>:3307)]
+    
+    User -->|HTTP<br/>GET/POST| Frontend
+    Frontend -->|REST API<br/>Bearer Token| Backend
+    Backend -->|JDBC<br/>SELECT/INSERT| DB
+    
+    DB -.->|ResultSet| Backend
+    Backend -.->|JSON| Frontend
+    Frontend -.->|HTML/CSS| User
+    
+    style User fill:#f9f9f9,stroke:#333,color:#000
+    style Frontend fill:#61DAFB,stroke:#333,color:#000
+    style Backend fill:#6DB33F,stroke:#333,color:#fff
+    style DB fill:#4479A1,stroke:#333,color:#fff
+    
+    linkStyle 0,1,2 stroke:#2ecc71,stroke-width:2px
+    linkStyle 3,4,5 stroke:#e74c3c,stroke-width:2px
 ```
 
+**Flow:**  
+🟢 Solid green arrows = Request  
+🔴 Dashed red arrows = Response
+
 **Components:**
-- **Backend:** Java 17, Spring Boot 3.x, JWT authentication
-- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS
-- **Database:** MySQL 8.0 with automatic schema creation
-- **Network:** Isolated Docker bridge network
+- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS, Nginx
+- **Backend:** Spring Boot 3.4.7, Java 17, JWT Authentication
+- **Database:** MySQL 8.0 with auto-initialization & seeding
+- **Network:** Isolated Docker bridge network (workapp-network)
 
 ## Prerequisites
 
