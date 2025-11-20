@@ -153,14 +153,49 @@ DB_PORT=3307
 DOCKER_USERNAME=grgks
 ```
 
+### JWT Secret Generation
+
+**⚠️ CRITICAL:** The JWT secret MUST be Base64 encoded!
+
+Using plain text or strings with special characters (like dashes) will cause authentication errors: `"Illegal base64 character"`.
+
+**Generate a valid Base64-encoded JWT secret:**
+
+**Linux/Mac/Git Bash:**
+```bash
+echo -n "your-secret-phrase-minimum-256-bits-long" | base64
+```
+
+**Windows PowerShell:**
+```powershell
+[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("your-secret-phrase-minimum-256-bits-long"))
+```
+
+**Online tool:** https://www.base64encode.org/
+
+**Example:**
+```env
+# ❌ WRONG - Plain text with dashes (will cause errors)
+DEPLOY_JWT_SECRET=my-super-secret-jwt-key-with-dashes
+
+# ❌ WRONG - Special characters not Base64 encoded
+DEPLOY_JWT_SECRET=MySecret@Key#2024!
+
+# ✅ CORRECT - Base64 encoded string
+DEPLOY_JWT_SECRET=bXktc3VwZXItc2VjcmV0LWp3dC1rZXktbWluaW11bS0yNTYtYml0cy1sb25nLWZvci1zZWN1cmUtZ2VuZXJhdGlvbg==
+```
+
+**Why Base64?** The JWT library expects the signing key in Base64 format for proper HMAC signature generation.
+
 ### Required Variables
 
 | Variable | Description | Example | Required |
 |----------|-------------|---------|----------|
 | `DEPLOY_DB_NAME` | MySQL database name | `appointment_system_restdb` | ✅ |
-| `DEPLOY_DB_USERNAME` | MySQL application user | `usertest` | ✅ |
-| `DEPLOY_DB_PASSWORD` | MySQL password | Strong password | ✅ |
-| `DEPLOY_JWT_SECRET` | JWT signing key | 256+ bit string | ✅ |
+| `DEPLOY_DB_USERNAME` | MySQL application user | `app7sys` | ✅ |
+| `DEPLOY_DB_PASSWORD` | MySQL password | `mySecurePassword123` | ✅ |
+| `DEPLOY_JWT_SECRET` | JWT signing key (**Base64 encoded**) | `bXktc3VwZXIuc2VjcmV0a2V5...` | ✅ |
+| `MYSQL_ROOT_PASSWORD` | MySQL root password | `RootPass123!` | ✅ |
 
 ### Optional Variables
 
