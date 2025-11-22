@@ -5,6 +5,20 @@ Complete Docker-based deployment configuration for the WorkApp full-stack applic
 [![Docker Backend](https://img.shields.io/badge/Docker-Backend-2496ED?logo=docker)](https://hub.docker.com/r/grgks/workapp-backend)
 [![Docker Frontend](https://img.shields.io/badge/Docker-Frontend-2496ED?logo=docker)](https://hub.docker.com/r/grgks/workapp-frontend)
 
+## 🌐 Production Deployment
+
+**Live Application:**
+- **Frontend:** https://appointment-system-react-one.vercel.app
+- **Backend API:** https://system-management-restapi.onrender.com
+- **Documentation:** https://system-management-restapi.onrender.com/swagger-ui.html
+
+**Production Stack:**
+- Frontend deployed on **Vercel** with automatic HTTPS & CDN
+- Backend deployed on **Render** using Docker containers
+- Analytics: Vercel Analytics & Speed Insights enabled
+
+⚠️ **Note:** This repository's Docker Compose setup is for **local development**. Production uses cloud platforms (Vercel + Render) for optimal performance and scalability.
+
 ## 📋 Table of Contents
 
 - [Overview](#overview)
@@ -19,13 +33,15 @@ Complete Docker-based deployment configuration for the WorkApp full-stack applic
 
 ## Overview
 
-This repository provides production-ready Docker Compose configuration for deploying the complete WorkApp system with:
+This repository provides Docker Compose configuration for **local development** of the complete WorkApp system with:
 
 - **Backend API:** Spring Boot REST API with JWT authentication
 - **Frontend:** React TypeScript SPA with modern UI
 - **Database:** MySQL 8.0 with automated initialization
 - **Auto-seeding:** Pre-configured cities data
 - **Health checks:** Automated container health monitoring
+
+ **Production Deployment:** For cloud deployment, see production URLs above. This Docker Compose setup is optimized for local development and testing.
 
 ## System Architecture & Flow
 ```mermaid
@@ -333,6 +349,32 @@ View security reports:
   - Nginx-based
   - Size: 84MB
   - Production-optimized
+
+## 🚀 Production vs Development
+
+### Local Development (This Repository)
+- **Purpose:** Development, testing, and demonstration
+- **Stack:** Docker Compose with MySQL
+- **URLs:** localhost:3000 (frontend), localhost:8080 (backend)
+- **Database:** Local MySQL container
+- **Best for:** Development, learning, local testing
+
+### Production Deployment
+- **Purpose:** Live application for end users
+- **Frontend:** Vercel (https://appointment-system-react-one.vercel.app)
+  - Automatic deployments from GitHub
+  - Global CDN for fast loading
+  - Analytics & Speed Insights enabled
+- **Backend:** Render (https://system-management-restapi.onrender.com)
+  - Docker-based deployment
+  - Automatic HTTPS
+  - Environment variables management
+- **Database:** MySQL 8.0 (managed service)
+- **Best for:** Production use, public access
+
+**Note:** The production deployment uses the same Docker images from this repository, ensuring consistency between development and production environments.
+
+---
 
 ## 📄 License
 
